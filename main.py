@@ -16,44 +16,46 @@ plt.rc('font', family='serif')
 parser = argparse.ArgumentParser(description='runge-kutta integration of the Lane-Emden equation.')
 parser.add_argument('-n', '--nthorder', metavar = 'nth-order', type = float, default = 0, help='Change the order of the integrated function, default value is 0.')
 parser.add_argument('-t', '--tstep', metavar = 'time_step', type = float, default = 0.05, help='Change the time step of integration, default value is 0.05.')
-parser.add_argument('-c', '--check', action = 'store_true', default = False, help='Change if analytical plot is shown or not for n = 0 and n = 1, default is off.')
-parser.add_argument('-e', '--eval', action = 'store_true', default = False, help='Change if xi_1 and d theta/d xi (xi_1) is printed or not, default is off.')
-args = parser.parse_args()
-# define integration variables
-n = args.nthorder
-t_step = args.tstep
+parser.add_argument('--check', action = 'store_true', default = False, help='Change if analytical plot is shown or not for n = 0 and n = 1, default is off.')
+parser.add_argument('--eval', action = 'store_true', default = False, help='Change if xi_1 and d theta/d xi (xi_1) is printed or not, default is off.')
 
-# define initial conditions
-x_0 = 1e-50 # need some small value that is close to 0 but not exactly 0
-y_0 = 1
-z_0 = 0
+if __name__ == '__main__':
+    args = parser.parse_args()
+    # define integration variables
+    n = args.nthorder
+    t_step = args.tstep
 
-# do the integration and compile the results into two lists
-xs = [x_0]
-ys = [y_0]
-while y_0>0:
-    x_0, y_0, z_0 = runge_kutta.integrate(x_0, y_0, z_0, n, t_step)
-    xs.append(x_0)
-    ys.append(y_0)
+    # define initial conditions
+    x_0 = 1e-50 # need some small value that is close to 0 but not exactly 0
+    y_0 = 1
+    z_0 = 0
 
-# checking that the runge-kutta method is valid
-if args.check is True:
-    if n == 0:
-        def check(x):
-            return 1 - x**2/6
-    elif n == 1:
-        def check(x):
-            return np.sin(x)/x
+    # do the integration and compile the results into two lists
+    xs = [x_0]
+    ys = [y_0]
+    while y_0>0:
+        x_0, y_0, z_0 = runge_kutta.integrate(x_0, y_0, z_0, n, t_step)
+        xs.append(x_0)
+        ys.append(y_0)
 
-if args.eval is True:
-    print('xi_1 =', x_0)
-    print('d theta / d xi (xi_1) =', z_0)
+    # checking that the runge-kutta method is valid
+    if args.check is True:
+        if n == 0:
+            def check(x):
+                return 1 - x**2/6
+        elif n == 1:
+            def check(x):
+                return np.sin(x)/x
 
-# plots
-plt.plot(xs, ys, label = 'runge-kutta')
-if args.check is True:
-    plt.plot(xs, np.vectorize(check)(xs), label = 'actual')
-    plt.legend()
-plt.xlabel(r'$\xi$')
-plt.ylabel(r'$\theta$')
-plt.show()
+    if args.eval is True:
+        print('xi_1 =', x_0)
+        print('d theta / d xi (xi_1) =', z_0)
+
+    # plots
+    plt.plot(xs, ys, label = 'runge-kutta')
+    if (args.check is True and n==0) or (args.check is True and n==1):
+        plt.plot(xs, np.vectorize(check)(xs), label = 'actual')
+        plt.legend()
+    plt.xlabel(r'$\xi$')
+    plt.ylabel(r'$\theta$')
+    plt.show()
