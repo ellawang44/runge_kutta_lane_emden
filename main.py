@@ -39,7 +39,7 @@ if __name__ == '__main__':
         ys.append(y_0)
 
     # checking that the runge-kutta method is valid
-    if args.check is True:
+    if args.check:
         if n == 0:
             def check(x):
                 return 1 - x**2/6
@@ -47,13 +47,13 @@ if __name__ == '__main__':
             def check(x):
                 return np.sin(x)/x
 
-    if args.eval is True:
+    if args.eval:
         print('xi_1 =', x_0)
         print('d theta / d xi (xi_1) =', z_0)
 
     # plots
     plt.plot(xs, ys, label = 'runge-kutta')
-    if (args.check is True and n==0) or (args.check is True and n==1):
+    if (args.check and n==0) or (args.check and n==1):
         plt.plot(xs, np.vectorize(check)(xs), label = 'actual')
         plt.legend()
     plt.xlabel(r'$\xi$')
