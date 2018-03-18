@@ -15,7 +15,7 @@ To change the time step per integration, use the flag `-t` or `--tstep`. e.g: `-
 
 To plot the analytical solution for `n=0` and `n=1` on the same graph as the numerical solution, use the flag `--check`. Note that this is only valid for `n=0` and `n=1` as other values of `n` do not have an analytical solution.
 
-To print the value of \xi and \frac{d \theta}{d \xi} at \xi = \xi_1 (i.e at \theta = 0), use the flag --eval`.
+To print the value of \xi and \frac{d \theta}{d \xi} at \xi = \xi_1 (i.e at \theta = 0), use the flag `--eval`.
 
 # Dependencies
 This program was written in Python, and runs on both Python 2 and 3 producing identical results.  
