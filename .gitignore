@@ -1,0 +1,11 @@
+*.pdf
+*.tex
+*.aux
+*.dvi
+*.png
+*.jpg
+*.doc
+*.log
+*.gz
+*.out
+__pycache__
