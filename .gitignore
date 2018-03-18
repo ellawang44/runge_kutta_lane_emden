@@ -9,3 +9,4 @@
 *.gz
 *.out
 __pycache__
+*.pyc
