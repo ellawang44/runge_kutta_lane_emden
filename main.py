@@ -51,7 +51,6 @@ if __name__ == '__main__':
         print('d theta / d xi (xi_1) =', z_0)
 
     # plots
-    plt.ion()
     plt.plot(xis, thetas, label = 'runge-kutta')
     if (args.check and n==0) or (args.check and n==1):
         plt.plot(xis, np.vectorize(check)(xis), label = 'actual')
