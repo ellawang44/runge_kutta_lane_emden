@@ -20,4 +20,4 @@ To print the value of \xi and \frac{d \theta}{d \xi} at \xi = \xi_1 (i.e at \the
 # Dependencies
 This program was written in Python, and runs on both Python 2 and 3 producing identical results.  
 ## Required Python Packages
-The required Python packages include: `matplotlib.pyplot`, `numpy`, and `argparse`
+The required Python packages include: `matplotlib`, `numpy`, and `argparse`
